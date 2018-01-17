@@ -1,1 +1,96 @@
-123
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Laravel</title>
+</head>
+<body>
+<span id="balance">0.00000001</span>
+<ul style="list-style:none; text-align: center; margin-left:1em;margin-top:10px;">
+    <li>BET AMOUNT</li>
+    <li><a href="javascript:void(0);" id="double_your_btc_half">/2</a></li>
+    <li><a href="javascript:void(0);" id="double_your_btc_2x">2x</a></li>
+    <li><a href="javascript:void(0);" id="double_your_btc_min">MIN</a></li>
+    <li><a href="javascript:void(0);" id="double_your_btc_max">MAX</a></li>
+</ul>
+<form>
+    <input id="double_your_btc_stake" value="0.00000001">
+</form>
+
+<div id="double_your_btc_bet_lose" style="display: none;">123</div>
+
+<script>
+    var btc_min = $("#double_your_btc_min");//最小
+    var btc_2x = $("#double_your_btc_2x");//2倍
+    var btc_bet_hi_button = $("#double_your_btc_bet_hi_button");//大
+    var btc_bet_lo_button = $("#double_your_btc_bet_lo_button");//小
+    var btc_bet_lose = $("#double_your_btc_bet_lose");//输了显示红色
+    var btc_bet_win = $("#double_your_btc_bet_win");//赢了显示绿色
+    var btc_stake = $("#double_your_btc_stake");
+    var balance = $("#balance");
+
+    // Auto=window.setInterval("InsertAutoPage();",1000);
+    //每秒执行一次，若按钮状态为可用，进行点击
+    Auto = setInterval(function () {
+        readyGo();
+        isWin();
+    }, 1000);
+
+    /**
+     * 开始玩游戏了
+     */
+    function readyGo() {
+        setMin();    //初始化
+        betHi();    //压大
+    }
+
+    function isWin() {
+        for(var i=0; i<10; i++){
+            if(btc_bet_lose.css('display') == 'block'){
+                console.log('lose');
+                return ;
+            }
+            if(btc_bet_win.css('display') == 'block'){
+                console.log('win');
+                return ;
+            }
+            sleep(1000);
+        }
+    }
+
+    /**
+     * 设置最小
+     */
+    function setMin() {
+        if(balance.html() * 100000000 == 0){
+            alert('没钱了！');
+            clearInterval(Auto);
+        }
+        btc_min.click(); //设置最小 0.00000001
+        btc_2x.click(); //设置为 0.00000002
+    }
+
+    /**
+     * 压大
+     */
+    function betHi() {
+        btc_bet_hi_button.click();
+    }
+
+    /**
+     * 压小
+     */
+    function betHi() {
+        btc_bet_lo_button.click();
+    }
+
+    function sleep(n) { //n表示的毫秒数
+        var start = new Date().getTime();
+        while (true) if (new Date().getTime() - start > n) break;
+    }
+</script>
+</body>
+</html>
