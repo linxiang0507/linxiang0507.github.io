@@ -11,10 +11,23 @@
          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
        <![endif]-->
-    <script language="javascript">
-        url = window.location.href;
-        url = url.replace(url, "https://www.pgyer.com/weiSixPhone");//把网址代换
-        window.location.href = url;
+    <script>
+        
+	$(function () {
+		var u = navigator.userAgent;
+		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+		var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		if (isiOS) {//ios
+			location.href = "https://fir.im/weiliu";
+		}
+		else if (isAndroid) {//Android
+			location.href = "https://fir.im/96k2";
+		}
+		else {
+			location.href = "https://fir.im/96k2";
+		}
+	})
+    
     </script>
 </head>
 
